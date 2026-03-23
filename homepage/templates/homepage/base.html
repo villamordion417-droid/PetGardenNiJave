@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Memory Garden</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'homepage/styles.css' %}" />
+    <script defer src="{% static 'homepage/app.js' %}"></script>
+  </head>
+  <body class="garden-body">
+    <nav class="garden-nav">
+      <a href="{% url 'homepage:landing' %}">Home</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'homepage:upload' %}">Upload</a>
+      <a href="{% url 'homepage:wall' %}">Wall</a>
+      <a href="{% url 'homepage:logout' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'homepage:login' %}">Login</a>
+      <a href="{% url 'homepage:signup' %}">Signup</a>
+      {% endif %}
+    </nav>
+
+    <main class="garden-main">{% block content %}{% endblock %}</main>
+
+    <footer class="garden-footer">Pet Memory Garden • A place where love never fades</footer>
+  </body>
+</html>

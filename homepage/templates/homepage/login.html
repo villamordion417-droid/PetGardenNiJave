@@ -1,0 +1,23 @@
+{% extends 'homepage/base.html' %}
+{% block content %}
+<div class="auth-card">
+  <h2>Login</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="field">
+        {{ field.label_tag }}<br />
+        {{ field }}
+        {% if field.errors %}
+          <span class="error">{{ field.errors|striptags }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+    {% if form.non_field_errors %}
+      <div class="error">{{ form.non_field_errors|striptags }}</div>
+    {% endif %}
+    <button type="submit" class="btn">Login</button>
+  </form>
+  <p>New to the garden? <a href="{% url 'homepage:signup' %}">Sign Up</a></p>
+</div>
+{% endblock %}

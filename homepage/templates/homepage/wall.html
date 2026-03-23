@@ -1,0 +1,23 @@
+{% extends 'homepage/base.html' %}
+{% block content %}
+<div class="wall-page">
+  <h2>Memory Wall</h2>
+  {% if posts %}
+  <div class="post-grid">
+    {% for post in posts %}
+    <article class="card" id="post-{{ post.id }}">
+      <h3>{{ post.title|default:"Untitled" }}</h3>
+      <p>{{ post.caption|linebreaksbr }}</p>
+      <div class="meta">By {{ post.user.username }} • {{ post.created_at|date:"M d, Y H:i" }}</div>
+      <div class="candle-row">
+        <button class="candle-btn" data-post-id="{{ post.id }}">🕯️</button>
+        <span class="candle-count" id="candle-count-{{ post.id }}">{{ post.candle_count }}</span>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="no-posts">No memories yet. <a href="{% url 'homepage:upload' %}">Create the first one.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

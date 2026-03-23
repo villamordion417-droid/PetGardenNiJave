@@ -1,0 +1,23 @@
+{% extends 'homepage/base.html' %}
+{% block content %}
+<div class="upload-page">
+  <section class="upload-panel">
+    <h2>Share Your Memory</h2>
+    <form method="post" id="memory-form" novalidate>
+      {% csrf_token %}
+      <div class="field">{{ form.title.label_tag }}<br />{{ form.title }}</div>
+      <div class="field">{{ form.caption.label_tag }}<br />{{ form.caption }}</div>
+      <button type="submit" class="btn">Post to Wall</button>
+    </form>
+  </section>
+
+  <section class="preview-panel">
+    <h2>Live Preview</h2>
+    <div class="card preview-card">
+      <h3 id="preview-title">(Title will appear here)</h3>
+      <p id="preview-caption">(Your words will appear here)</p>
+      <p class="meta">By {{ user.username }} • just now</p>
+    </div>
+  </section>
+</div>
+{% endblock %}
